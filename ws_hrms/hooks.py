@@ -1,3 +1,5 @@
+import ws_hrms.overrides.shift_type_override
+
 app_name = "ws_hrms"
 app_title = "Ws Hrms"
 app_publisher = "Marwa"
@@ -137,13 +139,15 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+		"ShiftType": {
+		"get_attendance": "ws_hrms.overrides.shift_type_override.custom_get_attendance",
+        "process_auto_attendance": "ws_hrms.overrides.shift_type_override.custom_process_auto_attendance"
+    },
+    "Attendance": {
+        "validate": "ws_hrms.overrides.shift_type_override.custom_validate"
+    }
+}
 
 # Scheduled Tasks
 # ---------------
